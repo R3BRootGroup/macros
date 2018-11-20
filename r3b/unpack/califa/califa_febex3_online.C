@@ -20,12 +20,19 @@ void califa_febex3_online(){
   TStopwatch timer;
   timer.Start();
 
+  auto t = std::time(nullptr);
+  auto tm = *std::localtime(&t);
+  //std::cout << put_time(&tm, "%d_%m_%Y_%H_%M_%S") << std::endl;
+
+  std::ostringstream oss;
+  oss << std::put_time(&tm, "%d_%m_%Y_%H_%M_%S");
+
   const Int_t nev = -1; /* number of events to read, -1 - until CTRL+C */
   
   // Create source using ucesb for input ---------------------------------------
   TString filename = "--stream=lxg0898:6002";
   //TString filename = "~/lmd/data_0010.lmd";
-  TString outputFileName = "./data_online.root";
+  TString outputFileName = "./data_online_" + oss.str() + ".root";
   TString ntuple_options = "UNPACK:EVENTNO,UNPACK:TRIGGER,RAW";
   TString ucesb_dir = getenv("UCESB_DIR");
   TString ucesb_path = ucesb_dir + "/../upexps/201810_s444/201810_s444";
