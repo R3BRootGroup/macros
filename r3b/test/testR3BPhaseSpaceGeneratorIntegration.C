@@ -25,8 +25,8 @@ void testR3BPhaseSpaceGeneratorIntegration()
     // Primaries
     auto primGen = new FairPrimaryGenerator();
     auto gen = new R3BPhaseSpaceGenerator();
-    gen->SetBeamEnergyDistribution_AMeV(R3BDistribution1D::Delta(600));
-    gen->SetErelDistribution_keV(R3BDistribution1D::Delta(500));
+    gen->SetBeamEnergyAMeV(600);
+    gen->SetErelkeV(500);
     gen->AddHeavyIon({ "B-17", 5, 17, 5 });
     gen->AddParticle(2112);
     gen->AddParticle(2112);
