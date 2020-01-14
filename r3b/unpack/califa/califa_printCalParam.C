@@ -21,10 +21,10 @@ void califa_printCalParam() {
 #if 1
   
   auto parIo1 = new FairParRootFileIo();//Root
-  parIo1->open("Califa_CalParam_20190218.root","in"); //Insert the *.root file name
+  parIo1->open("YOUR_PARROOTFILE.root","in"); //Insert the *.root file name!
 #else
   auto parIo1 = new FairParAsciiFileIo();//Ascii
-  parIo1->open("cal_AmBe.par","in"); //Insert the *.par file name
+  parIo1->open("YOUR_PARROOTFILE.par","in"); //Insert the *.par file name1
 #endif
   rtdb->setFirstInput(parIo1);
   /* "califaCrystalCalPar" is th ename of the parameter container---------------------*/
