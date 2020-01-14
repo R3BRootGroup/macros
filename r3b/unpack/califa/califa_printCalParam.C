@@ -8,9 +8,6 @@
  * Put the header file into the 'r3bsource' directory and recompile.
  *
  */
-#include <iostream>
-#include <iomanip>
-
 
 void califa_printCalParam() {
 
