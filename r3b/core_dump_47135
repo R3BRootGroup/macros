@@ -1,0 +1,27 @@
+#0  0x00007fea0e662c6a in __GI___wait4 (pid=47180, stat_loc=stat_loc
+entry=0x7ffe271a8608, options=options
+entry=0, usage=usage
+entry=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:27
+#1  0x00007fea0e662c2b in __GI___waitpid (pid=<optimized out>, stat_loc=stat_loc
+entry=0x7ffe271a8608, options=options
+entry=0) at waitpid.c:38
+#2  0x00007fea0e5d1f97 in do_system (line=<optimized out>) at ../sysdeps/posix/system.c:172
+#3  0x00007fea0ed0c84e in TUnixSystem::StackTrace() () from /home/teetos/Programs/FairSoft/build/lib/root/libCore.so.6.16
+#4  0x00007fea0265c187 in FairLogger::LogFatalMessage () at /home/teetos/Programs/FairRoot/FairRoot/fairtools/FairLogger.cxx:195
+#5  0x00007fea02642115 in std::function<void ()>::operator()() const (this=0x7fea0264e700 <fair::Logger::fFatalCallback>) at /usr/include/c++/9/bits/std_function.h:683
+#6  fair::Logger::~Logger (this=0x7ffe271aade0, __in_chrg=<optimized out>) at /home/teetos/Programs/FairSoft/FairSoft/basics/FairLogger/logger/Logger.cxx:685
+#7  0x00007fea035a58fa in FairModule::SetGeometryFileName (this=this
+entry=0x564b692670b0, fname=<incomplete type>) at /home/teetos/Programs/FairSoft/build/include/fairlogger/Logger.h:316
+#8  0x00007fea01e79b07 in R3BDetector::R3BDetector (this=0x564b692670b0, name=..., detId=<optimized out>, geoFile=..., combi=...) at /home/teetos/Programs/R3BRoot/R3BRoot/r3bbase/R3BDetector.cxx:46
+#9  0x00007fea01c18f05 in R3BCalifa::R3BCalifa (this=0x564b692670b0, geoFile=..., combi=...) at /home/teetos/Programs/R3BRoot/R3BRoot/califa/sim/R3BCalifa.cxx:48
+#10 0x00007fe9ff66e6bd in ?? ()
+#11 0x000000000000000f in ?? ()
+#12 0x00007fea0d31ef92 in llvm::MCContext::createSymbolImpl(llvm::StringMapEntry<bool> const*, bool) () from /home/teetos/Programs/FairSoft/build/lib/root/libCling.so
+#13 0x00007fea0d3279b1 in llvm::MCContext::createSymbol(llvm::StringRef, bool, bool) () from /home/teetos/Programs/FairSoft/build/lib/root/libCling.so
+#14 0x00007fea0d2ff831 in int llvm::array_pod_sort_comparator<(anonymous namespace)::ELFObjectWriter::ELFSymbolData>(void const*, void const*) () from /home/teetos/Programs/FairSoft/build/lib/root/libCling.so
+#15 0x00007fea0e5c591c in msort_with_tmp (p=0x7ffe271aba50, b=0x564b694b9550, n=3) at msort.c:105
+#16 0x00007fea0e5c591c in msort_with_tmp (p=0x7ffe271aba50, b=0x564b694b9510, n=5) at msort.c:105
+#17 0x00007fea0e5c591c in msort_with_tmp (p=0x7ffe271aba50, b=0x564b694b9470, n=140643241741280) at msort.c:105
+#18 0x00007ffe271abe90 in ?? ()
+#19 0x00007ffe271abe90 in ?? ()
+#20 0x0000000000000000 in ?? ()

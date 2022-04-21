@@ -66,7 +66,7 @@ TGeoCombiTrans matDemo_4(0., 1.92093, -1.75703, new TGeoRotation("rotDemo_4", 0.
 TGeoCombiTrans matDemo_5(0., 1.92093, -1.75703, new TGeoRotation("rotDemo_5", 0., 20.3304, 0.));
 TGeoCombiTrans matDemo_6(0., 1.92093, -1.75703, new TGeoRotation("rotDemo_6", 0., 20.3304, 0.));
 */
-void create_califa_geo(const char* geoTag)
+void create_califa_demonstrator_s444(const char* geoTag = "teetos")
 {
   
   fGlobalTrans->SetTranslation(0.0,0.0,0.0);
@@ -84,7 +84,8 @@ void create_califa_geo(const char* geoTag)
   
   
   // -------   Geometry file name (output)   ----------------------------------
-  TString geoFileName = geoPath + "/geometry/califa_s444";
+  //TString geoFileName = geoPath + "/geometry/califa_s444";
+  TString geoFileName = geoPath + "/geometry/califa_tomas1_";
   geoFileName = geoFileName + geoTag + ".geo.root";
   // --------------------------------------------------------------------------
   

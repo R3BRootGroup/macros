@@ -1,4 +1,4 @@
-void run_sim()
+void run_sim_single_crystal()
 {
     TString transport = "TGeant4";
 
@@ -14,7 +14,7 @@ void run_sim()
     TString generator = generator1;
     TString inputFile = "";
 
-    Int_t nEvents = 100;
+    Int_t nEvents = 10;
     Bool_t storeTrajectories = kTRUE;
     Int_t randomSeed = 335566; // 0 for time-dependent random numbers
 
@@ -29,7 +29,7 @@ void run_sim()
     Bool_t fCalifaDigitizer = true; // Apply hit digitizer task
     Bool_t fCalifaHitFinder = true; // Apply hit finder task
     Double_t fCalifaNonU = 1.0;
-    TString fCalifaGeo = "califa_2020.geo.root";
+    TString fCalifaGeo = "califa_teetos2.geo.root";
     Int_t fCalifaGeoVer = 2020;
     Bool_t CalifaExpConfig = false;
 
@@ -137,29 +137,45 @@ void run_sim()
     if (generator.CompareTo("box") == 0)
     {
         // 2- Define the BOX generator
-        Int_t pdgId = 22;     // proton beam: 2212, gamma beam: 22
-        Double32_t theta1 = 220.; // polar angle distribution
-        Double32_t theta2 = 230.;
-        Double32_t momentum = 1.5;
-        FairBoxGenerator* boxGen = new FairBoxGenerator(pdgId, 10);
-        boxGen->SetThetaRange(theta1, theta2);
+        // (-23.0,-30.0,9.0) is near the bottom of the single crystal geometry
+        Int_t pdgId_gamma = 22;     // proton beam: 2212, gamma beam: 22
+        Double32_t theta1 = 90.; // polar angle distribution
+        Double32_t theta2 = 90.;
+        Double32_t phi1 = 89.;
+        Double32_t phi2 = 89.;
+        Double32_t momentum = 4.5; // Gev/c
+
+        //Gammas
+        FairBoxGenerator* boxGen = new FairBoxGenerator(pdgId_gamma, 2000);
+        boxGen->SetThetaRange(theta1-5, theta2+5);
         boxGen->SetPRange(momentum, momentum * 1.2);
-        boxGen->SetPhiRange(80, 90);
-        boxGen->SetXYZ(-20.0, 0.0, 10);
+        boxGen->SetPhiRange(phi1-5,phi2+5);
+        boxGen->SetXYZ(4.5, -5.0, 1.0);
+        //boxGen->SetXYZ(0.,0.,0.);
         primGen->AddGenerator(boxGen);
+        
+        //Muons
+        Double32_t momentum_mu = 3.104; // Normal momentum (GeV/c), for muons reaching sea level (Energy 4GeV and mass 0,10566 Gev/c²)
+        Int_t pdgId_mu = 13;
+        FairBoxGenerator* boxGen_mu = new FairBoxGenerator(pdgId_mu, 1);
+        boxGen_mu->SetThetaRange(theta1, theta2);
+        boxGen_mu->SetPRange(momentum_mu, momentum_mu); //3.5-4.2 Gev/c
+        boxGen_mu->SetPhiRange(phi1,phi2);
+        boxGen_mu->SetXYZ(4.5, -5.0, 1.0);
+        primGen->AddGenerator(boxGen_mu);
 
         // 128-Sn fragment
-        R3BIonGenerator* ionGen = new R3BIonGenerator(50, 128, 50, 10, 1.3);
-        ionGen->Beam.SetVertexDistribution(
-            R3BDistribution3D::Prism(R3BDistribution2D::Circle({ 0., 0. }, 0.1), R3BDistribution1D::Delta(-300)));
-        primGen->AddGenerator(ionGen);
+        //R3BIonGenerator* ionGen = new R3BIonGenerator(50, 128, 50, 10, 1.3);
+        //ionGen->Beam.SetVertexDistribution(
+        //    R3BDistribution3D::Prism(R3BDistribution2D::Circle({ 0., 0. }, 0.1), R3BDistribution1D::Delta(-300)));
+        //primGen->AddGenerator(ionGen);
 
         // neutrons
-        FairBoxGenerator* boxGen_n = new FairBoxGenerator(2112, 1);
-        boxGen_n->SetThetaRange(theta1, theta2);
+        FairBoxGenerator* boxGen_n = new FairBoxGenerator(2112, 0);
+        boxGen_n->SetThetaRange(100, 110);
         boxGen_n->SetPRange(momentum, momentum * 1.2);
-        boxGen_n->SetPhiRange(80, 90);
-        boxGen_n->SetXYZ(-20.0, 0.0, 10.0);
+        boxGen_n->SetPhiRange(phi1, phi2);
+        boxGen_n->SetXYZ(-23.0, -30.0, 9.0);
         primGen->AddGenerator(boxGen_n);
     }
 
